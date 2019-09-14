@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <script src='https://www.google.com/recaptcha/api.js?render=6LcYA7gUAAAAACWlaFgBE_gB1eiiqS_eLH-Vsrnj'></script>
+</head>
+<body>
+<h2 style="color: darkviolet; margin: 0 auto">Let's add some player!</h2>
+<h4 th:if="${message != null}" th:text="${message}" style="color: green"></h4>
+<h4 th:if="${errorMessage != null}" th:text="${errorMessage}" style="color: red"></h4>
+<br><hr>
+<form action="/addPlayer" method="post">
+    <input type="text" name="name" placeholder="Player Name"><br>
+    <input type="text" name="age" placeholder="Player Age"><br><br>
+    <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+    <input type="submit" value="Let's go!">
+</form>
+<script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LcYA7gUAAAAACWlaFgBE_gB1eiiqS_eLH-Vsrnj', {action: 'homepage'}).then(function(token) {
+            document.getElementById('g-recaptcha-response').value=token;
+        });
+    });
+</script>
+</body>
+</html>
